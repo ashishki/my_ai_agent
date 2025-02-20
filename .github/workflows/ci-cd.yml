@@ -17,7 +17,7 @@ jobs:
         image: postgres:14
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: 336401bB1!
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ai_agent_database
         ports:
           - 5432:5432
@@ -48,7 +48,7 @@ jobs:
 
       - name: Run tests
         env:
-          DATABASE_URL: postgresql+asyncpg://postgres:${POSTGRES_PASSWORD}@localhost:5432/ai_agent_database
+          DATABASE_URL: postgresql+asyncpg://postgres:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/ai_agent_database
           REDIS_URL: redis://localhost:6379
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
